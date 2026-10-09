@@ -1,0 +1,8 @@
+#requirements.txt khud ek file hai.
+#Iske andar tumhare Python project ki required packages/libraries ke naam rahenge.
+
+flask
+dotenv
+
+
+
