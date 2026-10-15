@@ -4,8 +4,8 @@
 flask
 dotenv
 psycopg2
-werkzeug.exceptions
-os
+
+
 
 
 
