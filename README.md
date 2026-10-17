@@ -2,7 +2,8 @@
 
 The project is a REST API built using Python and Flask, connected to a PostgreSQL database. It provides endpoints to manage 
 patient records through CRUD operations (Create, Read, Update, and Delete).
-The API includes basic input validation, JSON error responses, database connection handling, and environment-based configuration.
+The API includes API Key Authentication,Incoming request Validation,consistent error responses, basic input validation, 
+JSON error responses, database connection handling, and environment-based configuration.
 This project includes a health check endpoint, environment variable configuration using python-dotenv, 
 and basic application settings managed through a .env file.
 
@@ -12,7 +13,7 @@ to verify that the API is running successfully.
 
 ## Features
 
-* Built with Python and Flask.
+* Built with Python,Flask and PostgreSql.
 * Health check endpoint to verify API availability.
 * Environment variable management using python-dotenv.
 * Configurable application name, port, debug mode, and secret key.
@@ -36,6 +37,7 @@ ___.env
 * Psycopg2
 * REST API
 * JSON
+* API key Authentication
 
 ## FEATURES
 * Health check endpoint
@@ -49,6 +51,9 @@ ___.env
 * Custom HTTP 405 error handler
 * Database error handling and transaction rollback
 * Environment variable configuration using .env
+* API key Authentication
+* Incoming request validation(Payload Validation)
+* Consistent Error Responses
 
 ## ⚙️ Prerequisites
 
@@ -87,6 +92,7 @@ source venv/bin/activate
 Install the required packages:
 
 pip install Flask python-dotenv psycopg2-binary
+
 
 pip install -r requirements.txt
 
@@ -131,11 +137,11 @@ Create a database named patient_db using PostgreSQL or pgAdmin.
 Create the patient table using the following SQL:
 
 CREATE TABLE patient (
-    patient_id VARCHAR(5) ,
+    patient_id VARCHAR(5) primary key ,
     patient_name VARCHAR(30) NOT NULL,
     department VARCHAR(20) NOT NULL,
     appointment_date VARCHAR(10) NOT NULL,
-    transaction_id SERIAL PRIMARY KEY
+    transaction_id SERIAL unique
 );
 
 
@@ -154,6 +160,14 @@ Checks whether the API is responding.
 Endpoint: /health_check
 HTTP Method: GET
 URL: http://127.0.0.1:5000/health_check
+
+# API authentication END-POINT
+
+### /add_patient(protected end point)
+
+I have protected this end-point by x-api-key  Authentication.
+IF the clent enter the correct API-key with valid data and valid request method then 
+access this end point.If the client entered the wrong Api key they the response is Unauthorized Access.Enter a valid API key.
 
 ### HTTP METHODS  End-Point **Method_Endpoint_Description**
 

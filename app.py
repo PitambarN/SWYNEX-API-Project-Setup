@@ -85,9 +85,21 @@ def health_check():
 
 
 @app.route('/add_patient', methods=['POST'])
-
 def add_patient():
-
+    # get x-api-key from request.header
+   api = request.headers.get('x-api-key')
+    #check client provide api key or not
+   if not api:
+        return jsonify({
+            "Status": "Internal Server Error",
+            "message":"API key is Required"
+        }),401
+    #check api key valid or not
+   if API_SECRET_KEY != api:
+        return jsonify({
+            "Status": "Unauthorized",
+            "message": "Enter a valid API key"
+        }), 401
 
 
    conn=None
